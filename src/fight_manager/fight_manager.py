@@ -42,14 +42,16 @@ class FightManager:
 
     def _display_enemy_attack_menu(self):
         self._display_manager.display_enemies()
-        self._display_manager.display_enemy_attacks()
+        self._display_manager.display_enemy_attack_menu()
 
     def _display_new_ability_menu(self):
-        self._display_manager.display_enemies()  # TODO: show also enemy attack
+        self._display_manager.display_enemy_attacks()
+        self._display_manager.display_enemies()
         self._display_manager.display_new_abilities()
 
     def _display_fight(self):
-        self._display_manager.display_enemies()  # TODO: show also enemy attack
+        self._display_manager.display_enemy_attacks()
+        self._display_manager.display_enemies()
         # TODO: draw abilities
         self._display_manager.display_hand()
 

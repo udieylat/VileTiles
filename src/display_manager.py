@@ -29,5 +29,8 @@ class DisplayManager:
     def display_enemy_attacks(self):
         pass
 
+    def display_enemy_attack_menu(self):
+        pass
+
     def display_new_abilities(self):
         pass

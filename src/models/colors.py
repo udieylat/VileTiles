@@ -18,4 +18,19 @@ Green = Color(
     name="green",
     char="\U0001F7E9",
 )
-# TODO
+Yellow = Color(
+    name="green",
+    char="\U0001F7E8",
+)
+Red = Color(
+    name="green",
+    char="\U0001F7E5",
+)
+Purple = Color(
+    name="green",
+    char="\U0001F7EA",
+)
+Orange = Color(
+    name="green",
+    char="\U0001F7E7",
+)

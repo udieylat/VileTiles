@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from models.colors import Color
+from src.models.colors import Color
 
 
 @dataclass

@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from models.tiles import Tile
+from src.models.tiles import Tile
 
 
 @dataclass

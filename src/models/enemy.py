@@ -22,3 +22,9 @@ class Enemy:
             tile.color.char
             for tile in self.tiles[(index-1)*3:index*3]
         )
+
+    def __getitem__(self, i: int) -> Tile:
+        return self.tiles[i]
+
+    def __setitem__(self, i: int, new_tile: Tile) -> None:
+        self.tiles[i] = new_tile

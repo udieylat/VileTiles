@@ -1,3 +1,4 @@
+from src.abilities.ability import Ability
 from src.display_manager import DisplayManager
 from src.models.enemy import Enemy
 
@@ -11,6 +12,7 @@ class FightManager:
         self._display_manager = DisplayManager(
             enemies=enemies,
         )
+        self._hand: list[Ability] = []
         self.start()
 
     # TODO: design enemy attack choice
@@ -37,7 +39,10 @@ class FightManager:
             hand_index: int,
             ability_args: dict,
     ):
-        # TODO
+        # TODO: verify index
+        ability = self._hand[hand_index]
+        # TODO: play ability
+        # TODO: if successful, move to discard pile
         self._display_fight()
 
     def _display_enemy_attack_menu(self):

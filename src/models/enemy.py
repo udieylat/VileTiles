@@ -12,7 +12,7 @@ class Enemy:
             index: int,
     ) -> str:
         assert 1 <= index <= 3
-        return sum(
+        return "".join(
             tile.color.char
             for tile in self.tiles[(index-1)*3:index*3]
         )

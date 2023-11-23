@@ -17,8 +17,8 @@ class EnemyGenerator:
     }
 
     def generate_random_enemy(self) -> Enemy:
-        enemy_str = sum(
-            random.sample(self.S_TO_COLOR.keys(), 1)
+        enemy_str = "".join(
+            random.sample("bgyorp", 1)[0]
             for _ in range(9)
         )
         return self.str_to_enemy(

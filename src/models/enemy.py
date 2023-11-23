@@ -7,6 +7,12 @@ from src.models.tiles import Tile
 class Enemy:
     tiles: list[Tile]
 
+    def __repr__(self) -> str:
+        return f"""{self.get_display_row(index=1)}
+{self.get_display_row(index=2)}
+{self.get_display_row(index=3)}
+"""
+
     def get_display_row(
             self,
             index: int,

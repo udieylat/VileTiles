@@ -8,10 +8,12 @@ class DisplayManager:
     ):
         self._enemies = enemies
 
-    def display(self):
-        s = "\n".join(
+    def display_enemies(self):
+        prefix = "    "
+        gap = "       "
+        s = prefix + f"\n{prefix}".join(
             [
-                "    ".join(
+                gap.join(
                     [
                         enemy.get_display_row(
                             index=index,

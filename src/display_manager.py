@@ -25,3 +25,9 @@ class DisplayManager:
             ]
         )
         print(s)
+
+    def display_enemy_attacks(self):
+        pass
+
+    def display_new_abilities(self):
+        pass

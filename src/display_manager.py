@@ -43,8 +43,15 @@ class DisplayManager:
         print(s)
         print()
 
-    def display_enemy_attack_menu(self):
-        pass
+    @classmethod
+    def display_enemy_attacks_menu(
+            cls,
+            enemy_attacks: list[EnemyAttack],
+    ):
+        print()
+        for i, enemy_attack in enumerate(enemy_attacks):
+            print(f" {i+1}. {enemy_attack.description}")
+        print()
 
     def display_new_abilities(self):
         pass

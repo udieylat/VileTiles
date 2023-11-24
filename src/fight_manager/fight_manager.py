@@ -47,7 +47,7 @@ class FightManager:
 
     def _display_enemy_attack_menu(self):
         self._display_manager.display_enemies()
-        self._display_manager.display_enemy_attack_menu()
+        self._display_manager.display_enemy_attacks_menu()
 
     def _display_new_ability_menu(self):
         self._display_manager.display_enemy_attacks()

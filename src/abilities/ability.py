@@ -10,3 +10,6 @@ class Ability:
     ):
         ...
 
+    @abstractmethod
+    def __repr__(self) -> str:
+        ...

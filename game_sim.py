@@ -1,11 +1,11 @@
 import emoji
 # https://carpedm20.github.io/emoji/
 
-from src.abilities.ability import ChangeAbility
+from src.abilities.change_tile import ChangeTile
 from src.display_manager import DisplayManager
 from src.enemy_attacks.enemy_attack import NumberOfXTiles
 from src.enemy_generator.enemy_generator import EnemyGenerator
-from src.models.colors import Green, Purple
+from src.models.colors import Green, Purple, Orange
 
 eg = EnemyGenerator()
 enemies = [
@@ -32,12 +32,14 @@ disp2 = DisplayManager(
 print()
 print()
 disp2.display_enemies()
-# ca = ChangeTile()
-# ca.play(
+ct = ChangeTile(
+    from_color=Green,
+    to_color=Orange,
+)
+# ct.play(
 #     ability_args={
 #         "enemy": enemies[0],
 #         "tile_index": 0,
-#         "to_color": Purple,
 #     },
 # )
 #
@@ -46,6 +48,8 @@ disp2.display_enemies()
 # )
 # disp.display_enemies()
 
+print()
+print(ct)
 print()
 print(emoji.emojize(":drop_of_blood:") * 25)
 print((emoji.emojize(":shield:") + ' ') * 3)

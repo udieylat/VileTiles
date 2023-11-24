@@ -11,6 +11,10 @@ class NumberOfXTiles(EnemyAttack):
     ):
         self._color = color
 
+    @property
+    def description(self) -> str:
+        return f"Numer of {self._color}"
+
     def attack_for(
             self,
             enemy: Enemy,

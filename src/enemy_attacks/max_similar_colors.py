@@ -6,6 +6,10 @@ from src.models.enemy import Enemy
 
 class MaxSimilarColors(EnemyAttack):
 
+    @property
+    def description(self) -> str:
+        return "Max number of the same color"
+
     def attack_for(
             self,
             enemy: Enemy,

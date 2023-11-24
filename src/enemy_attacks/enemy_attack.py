@@ -14,6 +14,11 @@ class EnemyAttack:
     ) -> int:
         ...
 
+    @property
+    @abstractmethod
+    def description(self) -> str:
+        ...
+
     def attack_for_str(
             self,
             enemy: Enemy,

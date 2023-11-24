@@ -9,36 +9,42 @@ from src.models.colors import Green, Purple
 
 eg = EnemyGenerator()
 enemies = [
-    eg.generate_random_enemy()
-    for _ in range(3)
+    eg.generate_bullseye_enemy()
+    for _ in range(6)
 ]
 
 disp = DisplayManager(
-    enemies=enemies,
+    enemies=enemies[:3],
 )
 
-ea = NumberOfXTiles(
-    color=Green,
-)
+# ea = NumberOfXTiles(
+#     color=Green,
+# )
 
-disp.display_enemy_attacks(
-    enemy_attack=ea,
-)
+# disp.display_enemy_attacks(
+#     enemy_attack=ea,
+# )
 disp.display_enemies()
 
-ca = ChangeAbility()
-ca.play(
-    ability_args={
-        "enemy": enemies[0],
-        "tile_index": 0,
-        "to_color": Purple,
-    },
+disp2 = DisplayManager(
+    enemies=enemies[3:],
 )
-
-disp.display_enemy_attacks(
-    enemy_attack=ea,
-)
-disp.display_enemies()
+print()
+print()
+disp2.display_enemies()
+# ca = ChangeAbility()
+# ca.play(
+#     ability_args={
+#         "enemy": enemies[0],
+#         "tile_index": 0,
+#         "to_color": Purple,
+#     },
+# )
+#
+# disp.display_enemy_attacks(
+#     enemy_attack=ea,
+# )
+# disp.display_enemies()
 
 print()
 print(emoji.emojize(":drop_of_blood:") * 25)

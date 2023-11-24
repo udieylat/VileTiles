@@ -24,18 +24,18 @@ Green = Color(
     char=emoji.emojize(':green_square:'),
 )
 Yellow = Color(
-    name="green",
+    name="yellow",
     char=emoji.emojize(':yellow_square:'),
 )
 Red = Color(
-    name="green",
+    name="red",
     char=emoji.emojize(':red_square:'),
 )
 Purple = Color(
-    name="green",
+    name="purple",
     char=emoji.emojize(':purple_square:'),
 )
 Orange = Color(
-    name="green",
+    name="orange",
     char=emoji.emojize(':orange_square:'),
 )

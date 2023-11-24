@@ -9,29 +9,29 @@ from src.models.colors import Green, Purple, Orange
 
 eg = EnemyGenerator()
 enemies = [
-    eg.generate_bullseye_enemy()
-    for _ in range(6)
+    eg.generate_random_enemy()
+    for _ in range(3)
 ]
 
 disp = DisplayManager(
-    enemies=enemies[:3],
+    enemies=enemies,
 )
 
-# ea = NumberOfXTiles(
-#     color=Green,
-# )
+ea = NumberOfXTiles(
+    color=Green,
+)
 
-# disp.display_enemy_attacks(
-#     enemy_attack=ea,
-# )
+disp.display_enemy_attacks(
+    enemy_attack=ea,
+)
 disp.display_enemies()
-
-disp2 = DisplayManager(
-    enemies=enemies[3:],
-)
-print()
-print()
-disp2.display_enemies()
+#
+# disp2 = DisplayManager(
+#     enemies=enemies[3:],
+# )
+# print()
+# print()
+# disp2.display_enemies()
 ct = ChangeTile(
     from_color=Green,
     to_color=Orange,

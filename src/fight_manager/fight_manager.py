@@ -1,5 +1,7 @@
 from src.abilities.ability import Ability
 from src.display_manager import DisplayManager
+from src.enemy_attacks.enemy_attack import EnemyAttack
+from src.enemy_attacks.enemy_attack_generator import EnemyAttackGenerator
 from src.models.enemy import Enemy
 
 
@@ -9,6 +11,7 @@ class FightManager:
             enemies: list[Enemy],
     ):
         self._enemies = enemies
+        self._enemy_attack_generator = EnemyAttackGenerator()
         self._display_manager = DisplayManager(
             enemies=enemies,
         )
@@ -21,7 +24,10 @@ class FightManager:
 
     def start(self):
         # TODO: shuffle draw pile
-        self._display_enemy_attack_menu()
+        enemy_attacks = self._enemy_attack_generator.generate_enemy_attacks()
+        self._display_enemy_attack_menu(
+            enemy_attacks=enemy_attacks,
+        )
 
     def choose_enemy_attack(self, index: int):
         # TODO: validate flow
@@ -45,9 +51,14 @@ class FightManager:
         # TODO: if successful, move to discard pile
         self._display_fight()
 
-    def _display_enemy_attack_menu(self):
+    def _display_enemy_attack_menu(
+            self,
+            enemy_attacks: list[EnemyAttack],
+    ):
         self._display_manager.display_enemies()
-        self._display_manager.display_enemy_attacks_menu()
+        self._display_manager.display_enemy_attacks_menu(
+            enemy_attacks=enemy_attacks,
+        )
 
     def _display_new_ability_menu(self):
         self._display_manager.display_enemy_attacks()

@@ -1,24 +1,19 @@
 import random
 
-from src.models.colors import Blue, Green, Purple, Red, Yellow, Orange, Color
+from src.models.colors import Blue, Green, Purple, Red, Yellow, Orange, Color, ALL_COLORS
 from src.models.enemy import Enemy
 from src.models.tiles import Tile
 
 
 class EnemyGenerator:
 
-    COLOR_STRINGS = "bgyorp"
-    COLORS = [
-        Blue,
-        Green,
-        Yellow,
-        Orange,
-        Red,
-        Purple,
-    ]
+    COLOR_STRINGS = "".join(
+        color.name[0]
+        for color in ALL_COLORS
+    )
     S_TO_COLOR = {
         s: color
-        for s, color in zip(COLOR_STRINGS, COLORS)
+        for s, color in zip(COLOR_STRINGS, ALL_COLORS)
     }
 
     @classmethod
@@ -83,7 +78,7 @@ class EnemyGenerator:
     ) -> Color:
         colors = [
             color
-            for color in cls.COLORS
+            for color in ALL_COLORS
             if color != exclude_color
         ]
 

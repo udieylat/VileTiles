@@ -4,7 +4,7 @@ from src.enemy_attacks.enemy_attack import EnemyAttack
 from src.models.enemy import Enemy
 
 
-class MaxSimilarColors(EnemyAttack):
+class NumDifferentColors(EnemyAttack):
 
     @property
     def description(self) -> str:

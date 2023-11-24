@@ -3,7 +3,7 @@ import emoji
 
 from src.abilities.change_tile import ChangeTile
 from src.display_manager import DisplayManager
-from src.enemy_attacks.enemy_attack import NumberOfXTiles
+from src.enemy_attacks.numer_of_x_tiles import NumberOfXTiles
 from src.enemy_generator.enemy_generator import EnemyGenerator
 from src.models.colors import Green, Purple, Orange
 

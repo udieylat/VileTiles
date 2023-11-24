@@ -1,5 +1,7 @@
 from dataclasses import dataclass
 
+import emoji
+
 
 @dataclass
 class Color:
@@ -12,25 +14,25 @@ class Color:
 
 Blue = Color(
     name="blue",
-    char="\U0001F7E6",
+    char=emoji.emojize(':blue_square:'),
 )
 Green = Color(
     name="green",
-    char="\U0001F7E9",
+    char=emoji.emojize(':green_square:'),
 )
 Yellow = Color(
     name="green",
-    char="\U0001F7E8",
+    char=emoji.emojize(':yellow_square:'),
 )
 Red = Color(
     name="green",
-    char="\U0001F7E5",
+    char=emoji.emojize(':red_square:'),
 )
 Purple = Color(
     name="green",
-    char="\U0001F7EA",
+    char=emoji.emojize(':purple_square:'),
 )
 Orange = Color(
     name="green",
-    char="\U0001F7E7",
+    char=emoji.emojize(':orange_square:'),
 )

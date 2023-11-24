@@ -1,23 +1,12 @@
 from abc import abstractmethod
 
+import emoji
+
 from src.models.colors import Color
 from src.models.enemy import Enemy
 
 
 class EnemyAttack:
-
-    ATTACK_TO_STR = [
-        u'\u0030\ufe0f\u20e3',
-        u'\u0031\ufe0f\u20e3',
-        u'\u0032\ufe0f\u20e3',
-        u'\u0033\ufe0f\u20e3',
-        u'\u0034\ufe0f\u20e3',
-        u'\u0035\ufe0f\u20e3',
-        u'\u0036\ufe0f\u20e3',
-        u'\u0037\ufe0f\u20e3',
-        u'\u0038\ufe0f\u20e3',
-        u'\u0039\ufe0f\u20e3',
-    ]
 
     @abstractmethod
     def attack_for(
@@ -33,7 +22,7 @@ class EnemyAttack:
         attack = self.attack_for(
             enemy=enemy,
         )
-        return self.ATTACK_TO_STR[attack]
+        return emoji.emojize(f":keycap_{attack}:")
 
 
 class NumberOfXTiles(EnemyAttack):

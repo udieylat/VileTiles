@@ -41,5 +41,5 @@ disp.display_enemy_attacks(
 disp.display_enemies()
 
 print()
-print('\U0001FA78' * 25)
-print('\U0001F6E1 ' * 3)
+print(emoji.emojize(":drop_of_blood:") * 25)
+print((emoji.emojize(":shield:") + ' ') * 3)

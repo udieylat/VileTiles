@@ -11,6 +11,9 @@ class Color:
     def __str__(self) -> str:
         return self.char
 
+    def __eq__(self, other):
+        return isinstance(other, Color) and other.name == self.name
+
 
 Blue = Color(
     name="blue",

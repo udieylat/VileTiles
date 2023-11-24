@@ -32,7 +32,7 @@ disp2 = DisplayManager(
 print()
 print()
 disp2.display_enemies()
-# ca = ChangeAbility()
+# ca = ChangeTile()
 # ca.play(
 #     ability_args={
 #         "enemy": enemies[0],

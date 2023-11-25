@@ -103,10 +103,38 @@ class DisplayManager:
             num_shield: int,
             num_blood: int,
     ):
+        shield_str = cls._split_with_delimiter(
+            s=emoji.emojize(":shield:"),
+            total_amount=num_shield,
+        )
+        blood_str = cls._split_with_delimiter(
+            s=emoji.emojize(":drop_of_blood:"),
+            total_amount=num_blood,
+        )
         print()
-        print((emoji.emojize(":shield:") + ' ') * num_shield)
-        print(emoji.emojize(":drop_of_blood:") * num_blood)
+        print(shield_str)
+        print(blood_str)
         print()
+
+    @classmethod
+    def _split_with_delimiter(
+            cls,
+            s: str,
+            total_amount: int,
+            delimiter: str = ",",
+            num_split: int = 5,
+    ):
+        output = delimiter.join(
+            [
+                s * num_split
+                for _ in range(int(total_amount / num_split))
+            ]
+        )
+        if total_amount % num_split == 0:
+            return output
+        output += delimiter
+        output += s * (total_amount % num_split)
+        return output
 
     # def display_enemy_attacks_menu(self):
     #     # Maybe obsolete

@@ -18,6 +18,7 @@ class FightManager:
         self._display_manager = DisplayManager(
             enemy_manager=enemy_manager,
         )
+        self._deck = deck
         self._draw_pile: list[Ability] = deck.abilities[:]
         self._hand: list[Ability] = []
         self._discard_pile: list[Ability] = []
@@ -42,6 +43,11 @@ class FightManager:
     def show_discard_pile(self):
         self._display_manager.display_abilities(
             abilities=self._discard_pile,
+        )
+
+    def show_deck(self):
+        self._display_manager.display_abilities(
+            abilities=self._deck.abilities,
         )
 
     def play_ability(

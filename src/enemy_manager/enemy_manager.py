@@ -12,8 +12,8 @@ class EnemyManager:
     ):
         self._enemies = enemies
         self._enemy_attacks = enemy_attacks
-        self._enemy_buffs = []  # TODO
-        self._enemy_debuffs = []  # TODO
+        self._enemy_buffs = []  # TODO: maybe should be on the enemies
+        self._enemy_debuffs = []  # TODO: maybe should be on the enemies
 
     @property
     def enemies(self) -> list[Enemy]:

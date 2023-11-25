@@ -1,6 +1,5 @@
-from src.enemy_attacks.enemy_attack import EnemyAttack
+from src.abilities.ability import Ability
 from src.enemy_manager.enemy_manager import EnemyManager
-from src.models.enemy import Enemy
 
 
 class DisplayManager:
@@ -14,9 +13,18 @@ class DisplayManager:
     ):
         self._enemy_manager = enemy_manager
 
-    def display_enemies_and_attacks(self):
+    def display_fight(
+            self,
+            hand: list[Ability],
+    ):
         self.display_enemy_attacks()
         self.display_enemies()
+        print()
+        print()
+        self.display_hand(
+            hand=hand,
+        )
+        # TODO: display shields and blood
 
     def display_enemies(self):
         s = self.PREFIX + f"\n{self.PREFIX}".join(
@@ -45,12 +53,22 @@ class DisplayManager:
         print(s)
         print()
 
-    def display_enemy_attacks_menu(self):
-        # Maybe obsolete
+    @classmethod
+    def display_hand(
+            cls,
+            hand: list[Ability],
+    ):
         print()
-        for i, enemy_attack in enumerate(self._enemy_manager.enemy_attacks):
-            print(f" {i+1}. {enemy_attack.description}")
+        for i, ability in enumerate(hand):
+            print(f" {i+1}. {ability}")
         print()
 
-    def display_new_abilities(self):
-        pass
+    # def display_enemy_attacks_menu(self):
+    #     # Maybe obsolete
+    #     print()
+    #     for i, enemy_attack in enumerate(self._enemy_manager.enemy_attacks):
+    #         print(f" {i+1}. {enemy_attack.description}")
+    #     print()
+    #
+    # def display_new_abilities(self):
+    #     pass

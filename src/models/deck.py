@@ -1,7 +1,8 @@
-from pydantic import BaseModel
+from dataclasses import dataclass
 
 from src.abilities.ability import Ability
 
 
-class Deck(BaseModel):
+@dataclass
+class Deck:
     abilities: list[Ability]

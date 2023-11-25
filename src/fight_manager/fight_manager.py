@@ -64,11 +64,11 @@ class FightManager:
     #     self._display_manager.display_enemies()
     #     self._display_manager.display_enemy_attacks_menu()
 
-    def _display_new_ability_menu(self):
-        self._display_manager.display_enemies_and_attacks()
-        self._display_manager.display_new_abilities()
+    # def _display_new_ability_menu(self):
+    #     self._display_manager.display_enemies_and_attacks()
+    #     self._display_manager.display_new_abilities()
 
     def _display_fight(self):
-        self._display_manager.display_enemies_and_attacks()
-        self._display_manager.display_hand()
-
+        self._display_manager.display_fight(
+            hand=self._hand,
+        )

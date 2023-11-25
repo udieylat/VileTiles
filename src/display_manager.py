@@ -1,4 +1,5 @@
 from src.enemy_attacks.enemy_attack import EnemyAttack
+from src.enemy_manager.enemy_manager import EnemyManager
 from src.models.enemy import Enemy
 
 
@@ -9,9 +10,9 @@ class DisplayManager:
 
     def __init__(
             self,
-            enemies: list[Enemy],
+            enemy_manager: EnemyManager,
     ):
-        self._enemies = enemies
+        self._enemy_manager = enemy_manager
 
     def display_enemies(self):
         s = self.PREFIX + f"\n{self.PREFIX}".join(
@@ -21,7 +22,7 @@ class DisplayManager:
                         enemy.get_display_row(
                             index=index,
                         )
-                        for enemy in self._enemies
+                        for enemy in self._enemy_manager.enemies
                     ]
                 )
                 for index in [1, 2, 3]
@@ -35,21 +36,18 @@ class DisplayManager:
     ):
         s = self.PREFIX + self.GAP.join(
             [
-                f"  {enemy_attack.attack_for_str(enemy=enemy)}   "
-                for enemy in self._enemies
+                f"  {self._enemy_manager.attack_for_str(enemy=enemy)}   "
+                for enemy in self._enemy_manager.enemies
             ]
         )
         print()
         print(s)
         print()
 
-    @classmethod
-    def display_enemy_attacks_menu(
-            cls,
-            enemy_attacks: list[EnemyAttack],
-    ):
+    def display_enemy_attacks_menu(self):
+        # Maybe obsolete
         print()
-        for i, enemy_attack in enumerate(enemy_attacks):
+        for i, enemy_attack in enumerate(self._enemy_manager.enemy_attacks):
             print(f" {i+1}. {enemy_attack.description}")
         print()
 

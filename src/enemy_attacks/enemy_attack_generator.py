@@ -26,3 +26,7 @@ class EnemyAttackGenerator:
             num: int = 3,
     ) -> list[EnemyAttack]:
         return random.sample(ALL_ENEMY_ATTACKS, num)
+
+    @classmethod
+    def generate_enemy_attack(cls) -> EnemyAttack:
+        return cls.generate_enemy_attacks(num=1)[0]

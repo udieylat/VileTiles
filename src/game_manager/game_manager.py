@@ -13,6 +13,7 @@ class GameManager:
         fight_manager = FightManager(
             deck=self._deck,
             enemy_manager=self._enemy_manager,
+            num_blood=25,  # TODO: move to game config
         )
         fight_manager.start_fight()
         return fight_manager

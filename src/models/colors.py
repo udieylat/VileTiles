@@ -48,3 +48,11 @@ ALL_COLORS = [
     Purple,
     Orange,
 ]
+
+
+def name_to_color(name: str) -> Color:
+    return next(
+        color
+        for color in ALL_COLORS
+        if color.name == name
+    )

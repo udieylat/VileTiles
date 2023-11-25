@@ -17,6 +17,13 @@ class EnemyGenerator:
     }
 
     @classmethod
+    def generate_random_enemies(cls, num_enemies: int) -> list[Enemy]:
+        return [
+            cls.generate_random_enemy()
+            for _ in range(num_enemies)
+        ]
+
+    @classmethod
     def generate_random_enemy(cls) -> Enemy:
         enemy_str = "".join(
             random.sample(cls.COLOR_STRINGS, 1)[0]

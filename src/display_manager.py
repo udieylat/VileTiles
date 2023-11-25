@@ -14,6 +14,10 @@ class DisplayManager:
     ):
         self._enemy_manager = enemy_manager
 
+    def display_enemies_and_attacks(self):
+        self.display_enemy_attacks()
+        self.display_enemies()
+
     def display_enemies(self):
         s = self.PREFIX + f"\n{self.PREFIX}".join(
             [
@@ -30,10 +34,7 @@ class DisplayManager:
         )
         print(s)
 
-    def display_enemy_attacks(
-            self,
-            enemy_attack: EnemyAttack,
-    ):
+    def display_enemy_attacks(self):
         s = self.PREFIX + self.GAP.join(
             [
                 f"  {self._enemy_manager.attack_for_str(enemy=enemy)}   "

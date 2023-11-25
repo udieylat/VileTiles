@@ -13,7 +13,7 @@ class FightManager:
         self._enemies = enemies
         self._enemy_attack_generator = EnemyAttackGenerator()
         self._display_manager = DisplayManager(
-            enemies=enemies,
+            enemies=enemies,  # TODO
         )
         self._hand: list[Ability] = []
         self._start()
@@ -25,9 +25,7 @@ class FightManager:
     def _start(self):
         # TODO: shuffle draw pile
         enemy_attacks = self._enemy_attack_generator.generate_enemy_attacks()
-        self._display_enemy_attack_menu(
-            enemy_attacks=enemy_attacks,
-        )
+        self._display_enemy_attack_menu()
 
     def choose_enemy_attack(self, index: int):
         # TODO: validate flow
@@ -51,23 +49,16 @@ class FightManager:
         # TODO: if successful, move to discard pile
         self._display_fight()
 
-    def _display_enemy_attack_menu(
-            self,
-            enemy_attacks: list[EnemyAttack],
-    ):
+    def _display_enemy_attack_menu(self):
         self._display_manager.display_enemies()
-        self._display_manager.display_enemy_attacks_menu(
-            enemy_attacks=enemy_attacks,
-        )
+        self._display_manager.display_enemy_attacks_menu()
 
     def _display_new_ability_menu(self):
-        self._display_manager.display_enemy_attacks()
-        self._display_manager.display_enemies()
+        self._display_manager.display_enemies_and_attacks()
         self._display_manager.display_new_abilities()
 
     def _display_fight(self):
-        self._display_manager.display_enemy_attacks()
-        self._display_manager.display_enemies()
+        self._display_manager.display_enemies_and_attacks()
         # TODO: draw abilities
         self._display_manager.display_hand()
 

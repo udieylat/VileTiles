@@ -6,6 +6,7 @@ from src.models.tiles import Tile
 @dataclass
 class Enemy:
     tiles: list[Tile]
+    disabled: bool = False  #:cross_mark:
 
     def __repr__(self) -> str:
         return f"""{self.get_display_row(index=1)}
@@ -28,3 +29,6 @@ class Enemy:
 
     def __setitem__(self, i: int, new_tile: Tile) -> None:
         self.tiles[i] = new_tile
+
+    def disable(self):
+        self.disabled = True

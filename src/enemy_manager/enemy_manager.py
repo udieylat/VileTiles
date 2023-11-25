@@ -23,6 +23,14 @@ class EnemyManager:
     def enemy_attacks(self) -> list[EnemyAttack]:
         return self._enemy_attacks
 
+    def total_attack_for(self) -> int:
+        return sum(
+            self.attack_for(
+                enemy=enemy,
+            )
+            for enemy in self._enemies
+        )
+
     def attack_for(
             self,
             enemy: Enemy,

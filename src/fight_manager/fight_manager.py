@@ -22,10 +22,11 @@ class FightManager:
         self._hand: list[Ability] = []
         self._discard_pile: list[Ability] = []
         self._num_shield: int = 0
-        self._num_blood: int = num_blood
+        self._num_blood: int = num_blood  # TODO: change into manager so can track between fights
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         self._display_fight()
+        return ""
 
     def start_fight(self):
         self._shuffle_draw_pile()
@@ -42,28 +43,20 @@ class FightManager:
             abilities=self._discard_pile,
         )
 
-    # def choose_enemy_attack(self, index: int):
-    #     # TODO: validate flow
-    #     # TODO: choose something
-    #     self._display_new_ability_menu()
-
-    # def choose_new_ability(self, index: int):
-    #     # TODO: validate flow
-    #     # TODO: choose something
-    #     # TODO: update deck
-    #     self._display_fight()
-
     def play_ability(
             self,
             hand_index: int,
-            ability_args: dict,
+            **kwargs: dict,
     ):
         if hand_index <= 0 or hand_index > len(self._hand):
             raise IndexError(f"Hand size: {len(self._hand)}, invalid input index: {hand_index}")
         ability = self._hand[hand_index - 1]
+        if "enemy_index" in kwargs:
+            enemy_index = kwargs["enemy_index"]
+            kwargs["enemy"] = self._enemy_manager.enemies[enemy_index]
         try:
             ability_response: AbilityResponse = ability.play(
-                ability_args=ability_args,
+                ability_args=kwargs,
             )
         except InvalidPlay as e:
             print(f"Invalid play: {str(e)}")
@@ -73,8 +66,22 @@ class FightManager:
         self._handle_ability_response(
             ability_response=ability_response,
         )
+        self._trigger_elimination_conditions()
         self._hand.remove(ability)
         self._discard_pile.append(ability)
+        self._display_fight()
+
+    def end_turn(self):
+        total_attack_for = self._enemy_manager.total_attack_for()
+        if total_attack_for <= self._num_shield:
+            self._num_shield -= total_attack_for
+        else:
+            self._num_blood -= total_attack_for
+            self._num_blood += self._num_shield
+
+        self._num_shield = 0
+        self._discard_hand()
+        self._draw_abilities()
         self._display_fight()
 
     def _shuffle_draw_pile(self):
@@ -102,13 +109,13 @@ class FightManager:
     ):
         self._num_shield += ability_response.num_shields
 
-    # def _display_enemy_attack_menu(self):
-    #     self._display_manager.display_enemies()
-    #     self._display_manager.display_enemy_attacks_menu()
+    def _trigger_elimination_conditions(self):
+        # TODO
+        pass
 
-    # def _display_new_ability_menu(self):
-    #     self._display_manager.display_enemies_and_attacks()
-    #     self._display_manager.display_new_abilities()
+    def _discard_hand(self):
+        self._discard_pile += self._hand[:]
+        self._hand = []
 
     def _display_fight(self):
         self._display_manager.display_fight(

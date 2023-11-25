@@ -1,6 +1,6 @@
 import emoji
 
-from src.abilities.ability import Ability
+from src.abilities.ability import Ability, AbilityResponse
 from src.models.colors import Color
 from src.models.enemy import Enemy
 from src.models.exceptions import InvalidPlay
@@ -20,7 +20,7 @@ class ChangeTile(Ability):
     def play(
             self,
             ability_args: dict,
-    ):
+    ) -> AbilityResponse:
         enemy: Enemy = ability_args["enemy"]
         tile_index = ability_args["tile_index"]
         if enemy[tile_index].color != self._from_color:
@@ -31,6 +31,7 @@ class ChangeTile(Ability):
             color=self._to_color,
         )
         enemy[tile_index] = new_tile
+        return AbilityResponse.empty()
 
     def __repr__(self) -> str:
         return f'{self._from_color.char} {emoji.emojize(":right_arrow:")}  {self._to_color.char}'

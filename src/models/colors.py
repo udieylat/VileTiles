@@ -39,6 +39,10 @@ Orange = Color(
     name="orange",
     char=emoji.emojize(':orange_square:'),
 )
+AnyColor = Color(
+    name="any",
+    char=emoji.emojize(':joker:'),
+)
 
 ALL_COLORS = [
     Blue,

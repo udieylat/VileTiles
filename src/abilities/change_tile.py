@@ -1,7 +1,7 @@
 import emoji
 
 from src.abilities.ability import Ability, AbilityResponse
-from src.models.colors import Color
+from src.models.colors import Color, AnyColor, name_to_color
 from src.models.enemy import Enemy
 from src.models.exceptions import InvalidPlay
 from src.models.tiles import Tile
@@ -23,12 +23,19 @@ class ChangeTile(Ability):
     ) -> AbilityResponse:
         enemy: Enemy = ability_args["enemy"]
         tile_index = ability_args["tile_index"]
-        if enemy[tile_index].color != self._from_color:
+        if self._from_color != AnyColor and enemy[tile_index].color != self._from_color:
             raise InvalidPlay(
                 f"Enemy tile color {enemy[tile_index].color} != change tile from color {self._from_color}"
             )
+        to_color = (
+            self._to_color
+            if self._to_color != AnyColor
+            else name_to_color(
+                name=ability_args["to_color"],
+            )
+        )
         new_tile = Tile(
-            color=self._to_color,
+            color=to_color,
         )
         enemy[tile_index] = new_tile
         return AbilityResponse.empty()

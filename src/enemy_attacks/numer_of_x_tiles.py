@@ -1,3 +1,5 @@
+import emoji
+
 from src.enemy_attacks.enemy_attack import EnemyAttack
 from src.models.colors import Color
 from src.models.enemy import Enemy
@@ -13,7 +15,7 @@ class NumberOfXTiles(EnemyAttack):
 
     @property
     def description(self) -> str:
-        return f"Numer of {self._color}"
+        return f"{emoji.emojize(':keycap_#:')} {self._color}"
 
     def attack_for(
             self,

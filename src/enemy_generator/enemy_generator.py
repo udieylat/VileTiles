@@ -1,6 +1,6 @@
 import random
 
-from src.models.colors import Blue, Green, Purple, Red, Yellow, Orange, Color, ALL_COLORS
+from src.models.colors import Color, ALL_COLORS
 from src.models.enemy import Enemy
 from src.models.tiles import Tile
 

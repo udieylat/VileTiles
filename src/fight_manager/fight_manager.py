@@ -16,13 +16,13 @@ class FightManager:
             enemies=enemies,
         )
         self._hand: list[Ability] = []
-        self.start()
+        self._start()
 
     # TODO: design enemy attack choice
     # TODO: design new ability choice
     # TODO: design deck management
 
-    def start(self):
+    def _start(self):
         # TODO: shuffle draw pile
         enemy_attacks = self._enemy_attack_generator.generate_enemy_attacks()
         self._display_enemy_attack_menu(

@@ -10,4 +10,4 @@ class EliminationCondition:
             self,
             enemies: list[Enemy],
     ):
-        pass
+        ...

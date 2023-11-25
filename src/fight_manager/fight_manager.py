@@ -31,6 +31,7 @@ class FightManager:
     def start_fight(self):
         self._shuffle_draw_pile()
         self._draw_abilities()
+        self._trigger_elimination_conditions()
         self._display_fight()
 
     def show_draw_pile(self):
@@ -110,8 +111,7 @@ class FightManager:
         self._num_shield += ability_response.num_shields
 
     def _trigger_elimination_conditions(self):
-        # TODO
-        pass
+        self._enemy_manager.trigger_elimination_conditions()
 
     def _discard_hand(self):
         self._discard_pile += self._hand[:]

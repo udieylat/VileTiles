@@ -6,7 +6,7 @@ from src.models.tiles import Tile
 @dataclass
 class Enemy:
     tiles: list[Tile]
-    disabled: bool = False  #:cross_mark:
+    disabled: bool = False
 
     def __repr__(self) -> str:
         return f"""{self.get_display_row(index=1)}

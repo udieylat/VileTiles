@@ -2,6 +2,7 @@ import emoji
 
 from src.abilities.ability import Ability
 from src.enemy_manager.enemy_manager import EnemyManager
+from src.models.enemy import Enemy
 
 
 class DisplayManager:
@@ -21,10 +22,10 @@ class DisplayManager:
             num_shield: int,
             num_blood: int,
     ):
-        self.display_enemy_attacks()
-        self.display_enemies()
+        self._display_enemy_attacks()
+        self._display_enemies()
         print()  # TODO: buffs
-        print()  # TODO: debuffs
+        self._display_enemy_debuffs()
         self.display_abilities(
             abilities=hand,
         )
@@ -33,7 +34,7 @@ class DisplayManager:
             num_blood=num_blood,
         )
 
-    def display_enemies(self):
+    def _display_enemies(self):
         s = self.PREFIX + f"\n{self.PREFIX}".join(
             [
                 self.GAP.join(
@@ -49,7 +50,7 @@ class DisplayManager:
         )
         print(s)
 
-    def display_enemy_attacks(self):
+    def _display_enemy_attacks(self):
         s = self.PREFIX + self.GAP.join(
             [
                 f"  {self._enemy_manager.attack_for_str(enemy=enemy)}   "
@@ -59,6 +60,32 @@ class DisplayManager:
         print()
         print(s)
         print()
+
+    def _display_enemy_debuffs(self):
+        any_debuffs = any(
+            enemy.disabled  # TODO: change to any debuff
+            for enemy in self._enemy_manager.enemies
+        )
+        if not any_debuffs:
+            print()
+            return
+
+        s = self.PREFIX + self.GAP.join(
+            [
+                f"  {self._get_enemy_debuff_str(enemy=enemy)}   "
+                for enemy in self._enemy_manager.enemies
+            ]
+        )
+        print(s)
+
+    @classmethod
+    def _get_enemy_debuff_str(
+            cls,
+            enemy: Enemy,
+    ) -> str:
+        if enemy.disabled:
+            return emoji.emojize(":cross_mark:")
+        return " "
 
     @classmethod
     def display_abilities(

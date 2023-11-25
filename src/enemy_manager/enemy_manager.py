@@ -1,5 +1,6 @@
 import emoji
 
+from src.elimination_conditions.elimination_condition import EliminationCondition
 from src.enemy_attacks.enemy_attack import EnemyAttack
 from src.models.enemy import Enemy
 
@@ -9,9 +10,11 @@ class EnemyManager:
             self,
             enemies: list[Enemy],
             enemy_attacks: list[EnemyAttack],
+            elimination_conditions: list[EliminationCondition],
     ):
         self._enemies = enemies
         self._enemy_attacks = enemy_attacks
+        self._elimination_conditions = elimination_conditions
         self._enemy_buffs = []  # TODO: maybe should be on the enemies
         self._enemy_debuffs = []  # TODO: maybe should be on the enemies
 
@@ -35,6 +38,8 @@ class EnemyManager:
             self,
             enemy: Enemy,
     ) -> int:
+        if enemy.disabled:
+            return 0
         attack_sum = sum(
             enemy_attack.attack_for(
                 enemy=enemy,
@@ -51,3 +56,9 @@ class EnemyManager:
             enemy=enemy,
         )
         return emoji.emojize(f":keycap_{attack}:")
+
+    def trigger_elimination_conditions(self):
+        for elimination_condition in self._elimination_conditions:
+            elimination_condition.trigger(
+                enemies=self._enemies,
+            )

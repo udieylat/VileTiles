@@ -8,8 +8,8 @@ class EnemyManagerFactory:
     @classmethod
     def generate_enemy_manager(
             cls,
-            enemy_generator: EnemyGenerator,
-            enemy_attack_generator: EnemyAttackGenerator,
+            enemy_generator: EnemyGenerator = EnemyGenerator(),
+            enemy_attack_generator: EnemyAttackGenerator = EnemyAttackGenerator(),
             num_enemies: int = 3,
             num_enemy_attacks: int = 1,
     ) -> EnemyManager:

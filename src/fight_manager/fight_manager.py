@@ -1,31 +1,28 @@
+import random
+
 from src.abilities.ability import Ability
 from src.display_manager import DisplayManager
-from src.enemy_attacks.enemy_attack import EnemyAttack
-from src.enemy_attacks.enemy_attack_generator import EnemyAttackGenerator
-from src.models.enemy import Enemy
+from src.enemy_manager.enemy_manager import EnemyManager
+from src.models.deck import Deck
 
 
 class FightManager:
     def __init__(
             self,
-            enemies: list[Enemy],
+            deck: Deck,
+            enemy_manager: EnemyManager,
     ):
-        self._enemies = enemies
-        self._enemy_attack_generator = EnemyAttackGenerator()
+        self._enemy_manager = enemy_manager
         self._display_manager = DisplayManager(
-            enemies=enemies,  # TODO
+            enemy_manager=enemy_manager,
         )
+        self._draw_pile: list[Ability] = deck.abilities[:]
         self._hand: list[Ability] = []
-        self._start()
 
-    # TODO: design enemy attack choice
-    # TODO: design new ability choice
-    # TODO: design deck management
-
-    def _start(self):
-        # TODO: shuffle draw pile
-        enemy_attacks = self._enemy_attack_generator.generate_enemy_attacks()
-        self._display_enemy_attack_menu()
+    def start_fight(self):
+        self._shuffle_draw_pile()
+        self._draw_abilities()
+        self._display_fight()
 
     def choose_enemy_attack(self, index: int):
         # TODO: validate flow
@@ -49,9 +46,23 @@ class FightManager:
         # TODO: if successful, move to discard pile
         self._display_fight()
 
-    def _display_enemy_attack_menu(self):
-        self._display_manager.display_enemies()
-        self._display_manager.display_enemy_attacks_menu()
+    def _shuffle_draw_pile(self):
+        random.shuffle(self._draw_pile)
+
+    def _draw_abilities(self, num_abilities: int = 5):
+        for _ in range(num_abilities):
+            ability = self._draw_ability()
+            self._hand.append(ability)
+
+    def _draw_ability(self) -> Ability:
+        try:
+            return self._draw_pile.pop()
+        except IndexError:
+            raise  # TODO: shuffle discard pile
+
+    # def _display_enemy_attack_menu(self):
+    #     self._display_manager.display_enemies()
+    #     self._display_manager.display_enemy_attacks_menu()
 
     def _display_new_ability_menu(self):
         self._display_manager.display_enemies_and_attacks()
@@ -59,6 +70,5 @@ class FightManager:
 
     def _display_fight(self):
         self._display_manager.display_enemies_and_attacks()
-        # TODO: draw abilities
         self._display_manager.display_hand()
 

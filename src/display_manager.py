@@ -1,3 +1,5 @@
+import emoji
+
 from src.abilities.ability import Ability
 from src.enemy_manager.enemy_manager import EnemyManager
 
@@ -16,15 +18,20 @@ class DisplayManager:
     def display_fight(
             self,
             hand: list[Ability],
+            num_shield: int,
+            num_blood: int,
     ):
         self.display_enemy_attacks()
         self.display_enemies()
-        print()
-        print()
+        print()  # TODO: buffs
+        print()  # TODO: debuffs
         self.display_hand(
             hand=hand,
         )
-        # TODO: display shields and blood
+        self._display_shield_and_blood(
+            num_shield=num_shield,
+            num_blood=num_blood,
+        )
 
     def display_enemies(self):
         s = self.PREFIX + f"\n{self.PREFIX}".join(
@@ -61,6 +68,17 @@ class DisplayManager:
         print()
         for i, ability in enumerate(hand):
             print(f" {i+1}. {ability}")
+        print()
+
+    @classmethod
+    def _display_shield_and_blood(
+            cls,
+            num_shield: int,
+            num_blood: int,
+    ):
+        print()
+        print((emoji.emojize(":shield:") + ' ') * num_shield)
+        print(emoji.emojize(":drop_of_blood:") * num_blood)
         print()
 
     # def display_enemy_attacks_menu(self):

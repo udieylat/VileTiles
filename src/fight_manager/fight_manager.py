@@ -11,6 +11,7 @@ class FightManager:
             self,
             deck: Deck,
             enemy_manager: EnemyManager,
+            num_blood: int,
     ):
         self._enemy_manager = enemy_manager
         self._display_manager = DisplayManager(
@@ -18,22 +19,24 @@ class FightManager:
         )
         self._draw_pile: list[Ability] = deck.abilities[:]
         self._hand: list[Ability] = []
+        self._num_shield: int = 0
+        self._num_blood: int = num_blood
 
     def start_fight(self):
         self._shuffle_draw_pile()
         self._draw_abilities()
         self._display_fight()
 
-    def choose_enemy_attack(self, index: int):
-        # TODO: validate flow
-        # TODO: choose something
-        self._display_new_ability_menu()
+    # def choose_enemy_attack(self, index: int):
+    #     # TODO: validate flow
+    #     # TODO: choose something
+    #     self._display_new_ability_menu()
 
-    def choose_new_ability(self, index: int):
-        # TODO: validate flow
-        # TODO: choose something
-        # TODO: update deck
-        self._display_fight()
+    # def choose_new_ability(self, index: int):
+    #     # TODO: validate flow
+    #     # TODO: choose something
+    #     # TODO: update deck
+    #     self._display_fight()
 
     def play_ability(
             self,
@@ -71,4 +74,6 @@ class FightManager:
     def _display_fight(self):
         self._display_manager.display_fight(
             hand=self._hand,
+            num_shield=self._num_shield,
+            num_blood=self._num_blood,
         )

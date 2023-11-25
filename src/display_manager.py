@@ -104,7 +104,7 @@ class DisplayManager:
             num_blood: int,
     ):
         shield_str = cls._split_with_delimiter(
-            s=emoji.emojize(":shield:"),
+            s=emoji.emojize(":shield:") + " ",
             total_amount=num_shield,
         )
         blood_str = cls._split_with_delimiter(

@@ -6,7 +6,7 @@ from dataclasses import dataclass
 
 @dataclass
 class AbilityResponse:
-    num_shields: int = None
+    num_shields: int = 0
 
     @classmethod
     def empty(cls) -> AbilityResponse:

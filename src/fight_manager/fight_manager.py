@@ -24,6 +24,9 @@ class FightManager:
         self._num_shield: int = 0
         self._num_blood: int = num_blood
 
+    def __repr__(self):
+        self._display_fight()
+
     def start_fight(self):
         self._shuffle_draw_pile()
         self._draw_abilities()
@@ -31,12 +34,12 @@ class FightManager:
 
     def show_draw_pile(self):
         self._display_manager.display_abilities(
-            abilities=sorted(self._draw_pile),
+            abilities=self._draw_pile,  # TODO: hide order
         )
 
     def show_discard_pile(self):
         self._display_manager.display_abilities(
-            abilities=sorted(self._discard_pile),
+            abilities=self._discard_pile,
         )
 
     # def choose_enemy_attack(self, index: int):

@@ -2,7 +2,7 @@ import random
 
 from src.abilities.block import Block
 from src.abilities.change_tile import ChangeTile
-from src.models.colors import ALL_COLORS
+from src.models.colors import ALL_COLORS, AnyColor
 from src.models.deck import Deck
 
 
@@ -10,13 +10,14 @@ class StarterDeckGenerator:
 
     @classmethod
     def generate_starter_deck(cls) -> Deck:
+        all_colors = ALL_COLORS + [AnyColor]
         change_tile_abilities = [
             ChangeTile(
                 from_color=from_color,
                 to_color=to_color,
             )
-            for from_color in ALL_COLORS
-            for to_color in ALL_COLORS
+            for from_color in all_colors
+            for to_color in all_colors
             if from_color != to_color
         ]
         block_abilities = [

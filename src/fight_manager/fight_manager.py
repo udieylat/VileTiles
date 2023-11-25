@@ -1,9 +1,10 @@
 import random
 
-from src.abilities.ability import Ability
+from src.abilities.ability import Ability, AbilityResponse
 from src.display_manager import DisplayManager
 from src.enemy_manager.enemy_manager import EnemyManager
 from src.models.deck import Deck
+from src.models.exceptions import InvalidPlay
 
 
 class FightManager:
@@ -19,6 +20,7 @@ class FightManager:
         )
         self._draw_pile: list[Ability] = deck.abilities[:]
         self._hand: list[Ability] = []
+        self._discard_pile: list[Ability] = []
         self._num_shield: int = 0
         self._num_blood: int = num_blood
 
@@ -26,6 +28,16 @@ class FightManager:
         self._shuffle_draw_pile()
         self._draw_abilities()
         self._display_fight()
+
+    def show_draw_pile(self):
+        self._display_manager.display_abilities(
+            abilities=sorted(self._draw_pile),
+        )
+
+    def show_discard_pile(self):
+        self._display_manager.display_abilities(
+            abilities=sorted(self._discard_pile),
+        )
 
     # def choose_enemy_attack(self, index: int):
     #     # TODO: validate flow
@@ -43,10 +55,23 @@ class FightManager:
             hand_index: int,
             ability_args: dict,
     ):
-        # TODO: verify index
-        ability = self._hand[hand_index]
-        # TODO: play ability
-        # TODO: if successful, move to discard pile
+        if hand_index <= 0 or hand_index > len(self._hand):
+            raise IndexError(f"Hand size: {len(self._hand)}, invalid input index: {hand_index}")
+        ability = self._hand[hand_index - 1]
+        try:
+            ability_response: AbilityResponse = ability.play(
+                ability_args=ability_args,
+            )
+        except InvalidPlay as e:
+            print(f"Invalid play: {str(e)}")
+            self._display_fight()
+            return
+
+        self._handle_ability_response(
+            ability_response=ability_response,
+        )
+        self._hand.remove(ability)
+        self._discard_pile.append(ability)
         self._display_fight()
 
     def _shuffle_draw_pile(self):
@@ -54,14 +79,25 @@ class FightManager:
 
     def _draw_abilities(self, num_abilities: int = 5):
         for _ in range(num_abilities):
-            ability = self._draw_ability()
-            self._hand.append(ability)
+            self._draw_ability()
 
-    def _draw_ability(self) -> Ability:
+    def _draw_ability(self):
         try:
-            return self._draw_pile.pop()
+            ability = self._draw_pile.pop()
+            self._hand.append(ability)
         except IndexError:
-            raise  # TODO: shuffle discard pile
+            if len(self._discard_pile) == 0:
+                return None
+            self._draw_pile = self._discard_pile[:]
+            self._shuffle_draw_pile()
+            self._discard_pile = []
+            self._draw_ability()
+
+    def _handle_ability_response(
+            self,
+            ability_response: AbilityResponse,
+    ):
+        self._num_shield += ability_response.num_shields
 
     # def _display_enemy_attack_menu(self):
     #     self._display_manager.display_enemies()

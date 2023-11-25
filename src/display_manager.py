@@ -25,8 +25,8 @@ class DisplayManager:
         self.display_enemies()
         print()  # TODO: buffs
         print()  # TODO: debuffs
-        self.display_hand(
-            hand=hand,
+        self.display_abilities(
+            abilities=hand,
         )
         self._display_shield_and_blood(
             num_shield=num_shield,
@@ -61,12 +61,12 @@ class DisplayManager:
         print()
 
     @classmethod
-    def display_hand(
+    def display_abilities(
             cls,
-            hand: list[Ability],
+            abilities: list[Ability],
     ):
         print()
-        for i, ability in enumerate(hand):
+        for i, ability in enumerate(abilities):
             print(f" {i+1}. {ability}")
         print()
 

@@ -1,4 +1,5 @@
 import random
+import emoji
 
 from src.abilities.ability import Ability, AbilityResponse
 from src.display_manager import DisplayManager
@@ -88,6 +89,10 @@ class FightManager:
 
         self._num_shield = 0
         self._discard_hand()
+        self._num_blood = max(self._num_blood, 0)
+        if self._num_blood == 0:
+            self._game_over()
+            return
         self._draw_abilities()
         self._display_fight()
 
@@ -129,3 +134,13 @@ class FightManager:
             num_shield=self._num_shield,
             num_blood=self._num_blood,
         )
+
+    def _game_over(self):
+        print()
+        print(
+            f"{emoji.emojize(':face_with_crossed-out_eyes:')} "
+            f"GAME OVER "
+            f"{emoji.emojize(':face_with_crossed-out_eyes:')}"
+        )
+        print()
+        self._display_fight()

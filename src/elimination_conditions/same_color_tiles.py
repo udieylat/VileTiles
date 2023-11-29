@@ -1,15 +1,9 @@
-from src.elimination_conditions.elimination_condition import IndependentEliminationCondition
-from src.models.enemy import Enemy
+from src.elimination_conditions.x_tiles_same_color import XTilesSameColor
 
 
-class SameColorTiles(IndependentEliminationCondition):
+class SameColorTiles(XTilesSameColor):
 
-    @classmethod
-    def _eliminate_enemy(
-            cls,
-            enemy: Enemy,
-    ) -> bool:
-        return all(
-            enemy[0].color == tile.color
-            for tile in enemy.tiles
+    def __init__(self):
+        super().__init__(
+            num_tiles=9,
         )

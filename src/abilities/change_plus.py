@@ -6,7 +6,7 @@ from src.models.enemy import Enemy
 from src.models.tiles import Tile
 
 
-class ChangeLine(Ability):
+class ChangePlus(Ability):
 
     def __init__(
             self,
@@ -19,14 +19,6 @@ class ChangeLine(Ability):
             ability_args: dict,
     ) -> AbilityResponse:
         enemy: Enemy = ability_args["enemy"]
-        column = ability_args.get("column")
-        if column is None:
-            row = ability_args["row"]
-            assert row in [1, 2, 3]
-            tiles_range = range((row - 1) * 3, row * 3)
-        else:
-            assert column in [1, 2, 3]
-            tiles_range = range(column - 1, 9, 3)
         to_color = (
             self._to_color
             if self._to_color != AnyColor
@@ -34,7 +26,7 @@ class ChangeLine(Ability):
                 name=ability_args["to_color"],
             )
         )
-        for tile_index in tiles_range:
+        for tile_index in [1, 3, 4, 5, 7]:
             new_tile = Tile(
                 color=to_color,
             )
@@ -42,4 +34,4 @@ class ChangeLine(Ability):
         return AbilityResponse.empty()
 
     def __repr__(self) -> str:
-        return f'{emoji.emojize(":straight_ruler:")}{self._to_color.char}'
+        return f'{emoji.emojize(":plus:")}{self._to_color.char}'

@@ -22,6 +22,8 @@ class DisplayManager:
             num_shield: int,
             num_blood: int,
     ):
+        # TODO: display patterns trigger (enemy elimination / reward)
+        # TODO: display patterns
         self._display_enemy_attacks()
         self._display_enemies()
         print()  # TODO: buffs

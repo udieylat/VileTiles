@@ -10,8 +10,10 @@ class GameManager:
             num_blood: int = 25,
     ):
         self._deck = StarterDeckGenerator.generate_starter_deck()
-        self._enemy_manager = EnemyManagerFactory.generate_enemy_manager()
-        self._num_blood = num_blood
+        self._enemy_manager = EnemyManagerFactory.generate_enemy_manager()  # TODO: should be generated per fight?
+        self._num_blood = num_blood  # TODO: make manager
+
+    # TODO: build stations
 
     def start_fight(self) -> FightManager:
         fight_manager = FightManager(

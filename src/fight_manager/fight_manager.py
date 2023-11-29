@@ -15,6 +15,7 @@ class FightManager:
             enemy_manager: EnemyManager,
             num_blood: int,
     ):
+        # TODO: inherit from Station
         self._enemy_manager = enemy_manager
         self._display_manager = DisplayManager(
             enemy_manager=enemy_manager,
@@ -33,7 +34,7 @@ class FightManager:
     def start_fight(self):
         self._shuffle_draw_pile()
         self._draw_abilities()
-        self._trigger_elimination_conditions()
+        self._trigger_elimination_conditions()  # TODO: what if all enemies are disabled? How to move to next station?
         self._display_fight()
 
     def show_draw_pile(self):
@@ -75,11 +76,13 @@ class FightManager:
             ability_response=ability_response,
         )
         self._trigger_elimination_conditions()
+        # TODO: what if all enemies are disabled? How to move to next station?
         self._hand.remove(ability)
         self._discard_pile.append(ability)
         self._display_fight()
 
     def end_turn(self):
+        # TODO: what if all enemies are disabled? How to move to next station?
         total_attack_for = self._enemy_manager.total_attack_for()
         if total_attack_for <= self._num_shield:
             self._num_shield -= total_attack_for
@@ -138,8 +141,8 @@ class FightManager:
     def _game_over(self):
         print()
         print(
-            f"{emoji.emojize(':face_with_crossed-out_eyes:')} "
-            f"GAME OVER "
+            f"{emoji.emojize(':face_with_crossed-out_eyes:')}"
+            f" GAME OVER "
             f"{emoji.emojize(':face_with_crossed-out_eyes:')}"
         )
         print()

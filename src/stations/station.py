@@ -8,11 +8,13 @@ class Station:
     def __init__(
             self,
             next_station: Station,
-    ) -> None:
+    ):
         self._next_station = next_station
 
+    # TODO: __repr__, station number, name, description, etc
+
     @abstractmethod
-    def start(self) -> None:
+    def start(self):
         ...
 
     def complete(self) -> Station:

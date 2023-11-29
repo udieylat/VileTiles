@@ -4,6 +4,7 @@ import emoji
 from src.abilities.ability import Ability, AbilityResponse
 from src.display_manager import DisplayManager
 from src.enemy_manager.enemy_manager import EnemyManager
+from src.game_manager.blood_manager import BloodManager
 from src.models.deck import Deck
 from src.models.exceptions import InvalidPlay
 
@@ -13,7 +14,7 @@ class FightManager:
             self,
             deck: Deck,
             enemy_manager: EnemyManager,
-            num_blood: int,
+            blood_manager: BloodManager,
     ):
         # TODO: inherit from Station
         self._enemy_manager = enemy_manager
@@ -25,7 +26,7 @@ class FightManager:
         self._hand: list[Ability] = []
         self._discard_pile: list[Ability] = []
         self._num_shield: int = 0
-        self._num_blood: int = num_blood  # TODO: change into manager so can track between fights
+        self._blood_manager = blood_manager
 
     def __repr__(self) -> str:
         self._display_fight()
@@ -87,13 +88,13 @@ class FightManager:
         if total_attack_for <= self._num_shield:
             self._num_shield -= total_attack_for
         else:
-            self._num_blood -= total_attack_for
-            self._num_blood += self._num_shield
+            self._blood_manager.set_num_blood(
+                num_blood=self._blood_manager.num_blood + self._num_shield - total_attack_for,
+            )
 
         self._num_shield = 0
         self._discard_hand()
-        self._num_blood = max(self._num_blood, 0)
-        if self._num_blood == 0:
+        if self._blood_manager.is_dead():
             self._game_over()
             return
         self._draw_abilities()
@@ -135,7 +136,7 @@ class FightManager:
         self._display_manager.display_fight(
             hand=self._hand,
             num_shield=self._num_shield,
-            num_blood=self._num_blood,
+            num_blood=self._blood_manager.num_blood,
         )
 
     def _game_over(self):

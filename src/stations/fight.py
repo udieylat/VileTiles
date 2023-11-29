@@ -10,7 +10,7 @@ from src.models.exceptions import InvalidPlay
 from src.stations.station import Station
 
 
-class FightManager(Station):
+class Fight(Station):
     def __init__(
             self,
             deck: Deck,

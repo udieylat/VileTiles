@@ -1,5 +1,5 @@
 from src.enemy_manager.enemy_manager import EnemyManager
-from src.fight_manager.fight_manager import FightManager
+from src.stations.fight import Fight
 from src.game_manager.blood_manager import BloodManager
 from src.models.deck import Deck
 from src.stations.station import Station
@@ -17,7 +17,7 @@ class StationsBuilder:
     ) -> list[Station]:
         stations = [
             # TODO: add ability chooser
-            FightManager(
+            Fight(
                 deck=deck,
                 enemy_manager=enemy_manager,
                 blood_manager=blood_manager,

@@ -1,7 +1,7 @@
 import emoji
 
 from src.abilities.ability import Ability, AbilityResponse
-from src.models.colors import Color, name_to_color, AnyColor
+from src.models.colors import Color, name_to_color, AnyColor, ALL_COLORS
 from src.models.enemy import Enemy
 from src.models.tiles import Tile
 
@@ -43,3 +43,12 @@ class ChangeLine(Ability):
 
     def __repr__(self) -> str:
         return f'{emoji.emojize(":straight_ruler:")}{self._to_color.char}'
+
+    @classmethod
+    def all_options(cls) -> list[Ability]:
+        return [
+            ChangeLine(
+                to_color=to_color,
+            )
+            for to_color in ALL_COLORS
+        ]

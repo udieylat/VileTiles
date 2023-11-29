@@ -21,3 +21,12 @@ class Block(Ability):
 
     def __repr__(self) -> str:
         return (emoji.emojize(":shield:") + ' ') * self._num_block
+
+    @classmethod
+    def all_options(cls) -> list[Ability]:
+        return [
+            Block(
+                num_block=num_block,
+            )
+            for num_block in [3, 4, 5]
+        ]

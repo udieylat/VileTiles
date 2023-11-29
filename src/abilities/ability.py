@@ -25,3 +25,8 @@ class Ability:
     @abstractmethod
     def __repr__(self) -> str:
         ...
+
+    @classmethod
+    @abstractmethod
+    def all_options(cls) -> list[Ability]:
+        ...

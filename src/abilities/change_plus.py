@@ -1,7 +1,7 @@
 import emoji
 
 from src.abilities.ability import Ability, AbilityResponse
-from src.models.colors import Color, name_to_color, AnyColor
+from src.models.colors import Color, name_to_color, AnyColor, ALL_COLORS
 from src.models.enemy import Enemy
 from src.models.tiles import Tile
 
@@ -35,3 +35,12 @@ class ChangePlus(Ability):
 
     def __repr__(self) -> str:
         return f'{emoji.emojize(":plus:")}{self._to_color.char}'
+
+    @classmethod
+    def all_options(cls) -> list[Ability]:
+        return [
+            ChangePlus(
+                to_color=to_color,
+            )
+            for to_color in ALL_COLORS
+        ]

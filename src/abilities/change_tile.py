@@ -1,7 +1,7 @@
 import emoji
 
 from src.abilities.ability import Ability, AbilityResponse
-from src.models.colors import Color, AnyColor, name_to_color
+from src.models.colors import Color, AnyColor, name_to_color, ALL_COLORS
 from src.models.enemy import Enemy
 from src.models.exceptions import InvalidPlay
 from src.models.tiles import Tile
@@ -42,3 +42,14 @@ class ChangeTile(Ability):
 
     def __repr__(self) -> str:
         return f'{self._from_color.char} {emoji.emojize(":right_arrow:")}  {self._to_color.char}'
+
+    @classmethod
+    def all_options(cls) -> list[Ability]:
+        return [
+            ChangeTile(
+                from_color=from_color,
+                to_color=to_color,
+            )
+            for from_color in ALL_COLORS
+            for to_color in ALL_COLORS
+        ]

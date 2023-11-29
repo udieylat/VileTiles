@@ -5,12 +5,15 @@ from abc import abstractmethod
 
 class Station:
 
-    def __init__(
+    def __init__(self):
+        self._next_station: Station = None
+        self._is_active = False
+
+    def set_next_station(
             self,
-            next_station: Station = None,
+            next_station: Station,
     ):
         self._next_station = next_station
-        self._is_active = False
 
     @abstractmethod
     def __repr__(self) -> str:

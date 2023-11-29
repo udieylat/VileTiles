@@ -15,7 +15,7 @@ class StationsBuilder:
             enemy_manager: EnemyManager,
             blood_manager: BloodManager,
     ) -> list[Station]:
-        return [
+        stations = [
             # TODO: add ability chooser
             FightManager(
                 deck=deck,
@@ -25,3 +25,10 @@ class StationsBuilder:
             # TODO: add next fight
             Victory(),
         ]
+
+        for station, next_station in zip(stations[:-1], stations[1:]):
+            station.set_next_station(
+                next_station=next_station,
+            )
+
+        return stations

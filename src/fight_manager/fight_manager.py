@@ -7,16 +7,17 @@ from src.enemy_manager.enemy_manager import EnemyManager
 from src.game_manager.blood_manager import BloodManager
 from src.models.deck import Deck
 from src.models.exceptions import InvalidPlay
+from src.stations.station import Station
 
 
-class FightManager:
+class FightManager(Station):
     def __init__(
             self,
             deck: Deck,
             enemy_manager: EnemyManager,
             blood_manager: BloodManager,
     ):
-        # TODO: inherit from Station
+        super().__init__()
         self._enemy_manager = enemy_manager
         self._display_manager = DisplayManager(
             enemy_manager=enemy_manager,
@@ -32,10 +33,10 @@ class FightManager:
         self._display_fight()
         return ""
 
-    def start_fight(self):
+    def _start(self):
         self._shuffle_draw_pile()
         self._draw_abilities()
-        self._trigger_elimination_conditions()  # TODO: what if all enemies are disabled? How to move to next station?
+        self._trigger_elimination_conditions()
         self._display_fight()
 
     def show_draw_pile(self):
@@ -77,13 +78,15 @@ class FightManager:
             ability_response=ability_response,
         )
         self._trigger_elimination_conditions()
-        # TODO: what if all enemies are disabled? How to move to next station?
+        if not self.is_active:
+            return
         self._hand.remove(ability)
         self._discard_pile.append(ability)
         self._display_fight()
 
     def end_turn(self):
-        # TODO: what if all enemies are disabled? How to move to next station?
+        if not self.is_active:
+            return
         total_attack_for = self._enemy_manager.total_attack_for()
         if total_attack_for <= self._num_shield:
             self._num_shield -= total_attack_for
@@ -127,6 +130,8 @@ class FightManager:
 
     def _trigger_elimination_conditions(self):
         self._enemy_manager.trigger_elimination_conditions()
+        if self._enemy_manager.all_enemies_are_disabled():
+            self.complete()
 
     def _discard_hand(self):
         self._discard_pile += self._hand[:]

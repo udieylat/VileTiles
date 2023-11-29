@@ -62,3 +62,9 @@ class EnemyManager:
             elimination_condition.trigger(
                 enemies=self._enemies,
             )
+
+    def all_enemies_are_disabled(self) -> bool:
+        return all(
+            enemy.disabled
+            for enemy in self._enemies
+        )

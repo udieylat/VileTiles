@@ -7,12 +7,18 @@ class Station:
 
     def __init__(
             self,
-            next_station: Station,
+            next_station: Station = None,
     ):
         self._next_station = next_station
         self._is_active = False
 
-    # TODO: __repr__, station number, name, description, etc
+    @abstractmethod
+    def __repr__(self) -> str:
+        ...
+
+    @property
+    def is_active(self) -> bool:
+        return self._is_active
 
     def start(self):
         self._is_active = True

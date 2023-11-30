@@ -61,7 +61,11 @@ ALL_COLORS = [
     Purple,
     Orange,
 ]
-
+PATTERN_COLORS = [
+    Black,
+    Brown,
+    White,
+]
 
 def name_to_color(name: str) -> Color:
     return next(

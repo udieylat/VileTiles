@@ -28,6 +28,25 @@ class PatternGenerator:
             colors=pattern_colors,
         )
 
+    def generate_pattern_from_str(
+            self,
+            pattern_str: str,
+    ) -> Pattern:
+        assert len(pattern_str) == 9
+        pattern_str_set = set(pattern_str)
+        assert len(pattern_str_set) <= len(self._colors_pull)
+        random.shuffle(pattern_str_set)
+        pattern_char_to_color = {
+            pattern_char: self._colors_pull[i]
+            for i, pattern_char in enumerate(pattern_str_set)
+        }
+        return self._colors_to_pattern(
+            colors=[
+                pattern_char_to_color[pattern_char]
+                for pattern_char in pattern_str
+            ],
+        )
+
     @classmethod
     def _colors_to_pattern(
             cls,

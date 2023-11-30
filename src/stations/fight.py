@@ -3,10 +3,13 @@ import emoji
 
 from src.abilities.ability import Ability, AbilityResponse
 from src.display_manager import DisplayManager
+from src.enemy_generator.pattern_generator import PatternGenerator
 from src.enemy_manager.enemy_manager import EnemyManager
 from src.game_manager.blood_manager import BloodManager
+from src.models.colors import PATTERN_COLORS
 from src.models.deck import Deck
 from src.models.exceptions import InvalidPlay
+from src.models.pattern import Pattern
 from src.stations.station import Station
 
 
@@ -28,6 +31,8 @@ class Fight(Station):
         self._hand: list[Ability] = []
         self._discard_pile: list[Ability] = []
         self._num_shield: int = 0
+
+        self._patterns = self._generate_fight_patterns()
 
     def __repr__(self) -> str:
         self._display_fight()
@@ -103,6 +108,29 @@ class Fight(Station):
         self._draw_abilities()
         self._display_fight()
 
+    @classmethod
+    def _generate_fight_patterns(
+            cls,
+            num_patterns: int = 1,
+    ) -> list[Pattern]:
+        pattern_generator = PatternGenerator(
+            colors_pull=PATTERN_COLORS,
+        )
+        pattern_strings = [
+            "000111222",
+            "010121010",
+            "012121210",
+            "012111210",
+            "010010222",
+            "001001220",
+        ]
+        return [
+            pattern_generator.generate_pattern_from_str(
+                pattern_str=pattern_str,
+            )
+            for pattern_str in random.sample(pattern_strings, num_patterns)
+        ]
+
     def _shuffle_draw_pile(self):
         random.shuffle(self._draw_pile)
 
@@ -140,6 +168,7 @@ class Fight(Station):
     def _display_fight(self):
         self._display_manager.display_fight(
             hand=self._hand,
+            patterns=self._patterns,
             num_shield=self._num_shield,
             num_blood=self._blood_manager.num_blood,
         )

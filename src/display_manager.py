@@ -3,6 +3,7 @@ import emoji
 from src.abilities.ability import Ability
 from src.enemy_manager.enemy_manager import EnemyManager
 from src.models.enemy import Enemy
+from src.models.pattern import Pattern
 
 
 class DisplayManager:
@@ -37,14 +38,22 @@ class DisplayManager:
         )
 
     def _display_enemies(self):
+        self._display_patterns(
+            patterns=self._enemy_manager.enemies,
+        )
+
+    def _display_patterns(
+            self,
+            patterns: list[Pattern],
+    ):
         s = self.PREFIX + f"\n{self.PREFIX}".join(
             [
                 self.GAP.join(
                     [
-                        enemy.get_display_row(
+                        pattern.get_display_row(
                             index=index,
                         )
-                        for enemy in self._enemy_manager.enemies
+                        for pattern in patterns
                     ]
                 )
                 for index in [1, 2, 3]

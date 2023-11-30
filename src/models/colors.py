@@ -6,7 +6,11 @@ import emoji
 @dataclass
 class Color:
     name: str
-    char: str
+    char: str = None
+
+    def __post_init__(self):
+        if self.char is None:
+            self.char = emoji.emojize(f":{self.name}_square:")
 
     def __str__(self) -> str:
         return self.char
@@ -17,31 +21,36 @@ class Color:
 
 Blue = Color(
     name="blue",
-    char=emoji.emojize(':blue_square:'),
 )
 Green = Color(
     name="green",
-    char=emoji.emojize(':green_square:'),
 )
 Yellow = Color(
     name="yellow",
-    char=emoji.emojize(':yellow_square:'),
 )
 Red = Color(
     name="red",
-    char=emoji.emojize(':red_square:'),
 )
 Purple = Color(
     name="purple",
-    char=emoji.emojize(':purple_square:'),
 )
 Orange = Color(
     name="orange",
-    char=emoji.emojize(':orange_square:'),
+)
+Black = Color(
+    name="black",
+    char=emoji.emojize(":black_large_square:"),
+)
+Brown = Color(
+    name="brown",
+)
+White = Color(
+    name="white",
+    char=emoji.emojize(":white_large_square:"),
 )
 AnyColor = Color(
     name="any",
-    char=emoji.emojize(':joker:'),
+    char=emoji.emojize(":joker:"),
 )
 
 ALL_COLORS = [

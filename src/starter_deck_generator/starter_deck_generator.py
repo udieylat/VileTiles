@@ -33,16 +33,16 @@ class StarterDeckGenerator:
             for to_color in start_deck_colors
         ]
 
-        num_starter_change_tile_abilities = 6
-        num_starter_block_abilities = 3
+        # num_starter_change_tile_abilities = 6
+        # num_starter_block_abilities = 3
         starter_deck_abilities = (
-            random.sample(change_tile_abilities, num_starter_change_tile_abilities) +
-            random.sample(Block.all_options(), num_starter_block_abilities) +
+            change_tile_abilities +
+            Block.all_options() +
             random.sample(
                 ChangeBox.all_options() +
                 ChangeLine.all_options() +
                 ChangePlus.all_options(),
-                3
+                3,
             )
         )
 

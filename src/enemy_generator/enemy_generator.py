@@ -1,48 +1,39 @@
 import random
 
+from src.enemy_generator.pattern_generator import PatternGenerator
 from src.models.colors import Color, ALL_COLORS
 from src.models.enemy import Enemy
 from src.models.tiles import Tile
 
 
-class EnemyGenerator:
+class EnemyGenerator(PatternGenerator):
 
-    COLOR_STRINGS = "".join(
-        color.name[0]
-        for color in ALL_COLORS
-    )
-    S_TO_COLOR = {
-        s: color
-        for s, color in zip(COLOR_STRINGS, ALL_COLORS)
-    }
+    def __init__(self):
+        super().__init__(
+            colors_pull=ALL_COLORS,
+        )
 
-    @classmethod
-    def generate_random_enemies(cls, num_enemies: int) -> list[Enemy]:
+    def generate_random_enemies(self, num_enemies: int) -> list[Enemy]:
         return [
-            cls.generate_random_enemy()
+            self.generate_random_enemy()
             for _ in range(num_enemies)
         ]
 
-    @classmethod
-    def generate_random_enemy(cls) -> Enemy:
-        enemy_str = "".join(
-            random.sample(cls.COLOR_STRINGS, 1)[0]
-            for _ in range(9)
-        )
-        return cls._str_to_enemy(
-            enemy_str=enemy_str,
+    def generate_random_enemy(self) -> Enemy:
+        pattern = self.generate_random_pattern()
+        return Enemy(
+            tiles=pattern.tiles,
         )
 
-    @classmethod
     def generate_bullseye_enemy(
-            cls,
+            self,
             out_color: Color = None,
             middle_color: Color = None,
     ) -> Enemy:
         if out_color is None:
-            out_color = cls._random_color()
+            out_color = self._random_color()
         if middle_color is None:
-            middle_color = cls._random_color(
+            middle_color = self._random_color(
                 exclude_color=out_color,
             )
         tiles = [
@@ -58,34 +49,13 @@ class EnemyGenerator:
             tiles=tiles,
         )
 
-    @classmethod
-    def _str_to_enemy(
-            cls,
-            enemy_str: str,
-    ) -> Enemy:
-        return Enemy(
-            tiles=[
-                cls._str_to_tile(
-                    s=s,
-                )
-                for s in enemy_str
-            ],
-        )
-
-    @classmethod
-    def _str_to_tile(cls, s: str) -> Tile:
-        return Tile(
-            color=cls.S_TO_COLOR[s],
-        )
-
-    @classmethod
     def _random_color(
-            cls,
+            self,
             exclude_color: Color = None,
     ) -> Color:
         colors = [
             color
-            for color in ALL_COLORS
+            for color in self._colors_pull
             if color != exclude_color
         ]
 

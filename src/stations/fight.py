@@ -18,16 +18,16 @@ class Fight(Station):
             blood_manager: BloodManager,
     ):
         super().__init__()
+        self._deck = deck
         self._enemy_manager = enemy_manager
+        self._blood_manager = blood_manager
         self._display_manager = DisplayManager(
             enemy_manager=enemy_manager,
         )
-        self._deck = deck
         self._draw_pile: list[Ability] = deck.abilities[:]
         self._hand: list[Ability] = []
         self._discard_pile: list[Ability] = []
         self._num_shield: int = 0
-        self._blood_manager = blood_manager
 
     def __repr__(self) -> str:
         self._display_fight()

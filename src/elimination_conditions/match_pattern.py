@@ -13,6 +13,10 @@ class MatchPattern(IndependentEliminationCondition):
         )
         self._pattern_str = pattern_str
 
+    @property
+    def description(self) -> str:
+        return "Match pattern"
+
     def _eliminate_enemy(
             self,
             enemy: Enemy,

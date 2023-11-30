@@ -37,6 +37,22 @@ class DisplayManager:
             num_blood=num_blood,
         )
 
+    @classmethod
+    def display_abilities(
+            cls,
+            abilities: list[Ability],
+    ):
+        print()
+        for i, ability in enumerate(abilities):
+            print(f" {i+1}. {ability}")
+        print()
+
+    def display_elimination_conditions(self):
+        print()
+        for i, elimination_condition in enumerate(self._enemy_manager.elimination_conditions):
+            print(f" {i+1}. {elimination_condition.description}")
+        print()
+
     def _display_enemies(self):
         self._display_patterns(
             patterns=self._enemy_manager.enemies,
@@ -99,16 +115,6 @@ class DisplayManager:
         return " "
 
     @classmethod
-    def display_abilities(
-            cls,
-            abilities: list[Ability],
-    ):
-        print()
-        for i, ability in enumerate(abilities):
-            print(f" {i+1}. {ability}")
-        print()
-
-    @classmethod
     def _display_shield_and_blood(
             cls,
             num_shield: int,
@@ -146,13 +152,3 @@ class DisplayManager:
         output += delimiter
         output += s * (total_amount % num_split)
         return output
-
-    # def display_enemy_attacks_menu(self):
-    #     # Maybe obsolete
-    #     print()
-    #     for i, enemy_attack in enumerate(self._enemy_manager.enemy_attacks):
-    #         print(f" {i+1}. {enemy_attack.description}")
-    #     print()
-    #
-    # def display_new_abilities(self):
-    #     pass

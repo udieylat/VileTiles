@@ -21,3 +21,7 @@ class XTilesSameColor(IndependentEliminationCondition):
             for tile in enemy.tiles
         ])
         return max(c.values()) >= self._num_tiles
+
+    @property
+    def description(self) -> str:
+        return f"{self._num_tiles} tiles with the same color"

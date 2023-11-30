@@ -22,3 +22,7 @@ class RectSameColorTiles(IndependentEliminationCondition):
             )
             for indices in rect_possible_indices
         )
+
+    @property
+    def description(self) -> str:
+        return "Rectangle with same tiles color"

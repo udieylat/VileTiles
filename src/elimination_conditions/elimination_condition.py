@@ -12,6 +12,11 @@ class EliminationCondition:
     ):
         ...
 
+    @property
+    @abstractmethod
+    def description(self) -> str:
+        ...
+
 
 class IndependentEliminationCondition(EliminationCondition):
 

@@ -26,6 +26,10 @@ class EnemyManager:
     def enemy_attacks(self) -> list[EnemyAttack]:
         return self._enemy_attacks
 
+    @property
+    def elimination_conditions(self) -> list[EliminationCondition]:
+        return self._elimination_conditions
+
     def total_attack_for(self) -> int:
         return sum(
             self.attack_for(

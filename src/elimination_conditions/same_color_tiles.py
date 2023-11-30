@@ -7,3 +7,7 @@ class SameColorTiles(XTilesSameColor):
         super().__init__(
             num_tiles=9,
         )
+
+    @property
+    def description(self) -> str:
+        return "All tiles with the same color"

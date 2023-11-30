@@ -33,12 +33,12 @@ class PatternGenerator:
             pattern_str: str,
     ) -> Pattern:
         assert len(pattern_str) == 9
-        pattern_str_set = set(pattern_str)
-        assert len(pattern_str_set) <= len(self._colors_pull)
-        random.shuffle(pattern_str_set)
+        unique_pattern_chars = list(set(pattern_str))
+        assert len(unique_pattern_chars) <= len(self._colors_pull)
+        random.shuffle(unique_pattern_chars)
         pattern_char_to_color = {
             pattern_char: self._colors_pull[i]
-            for i, pattern_char in enumerate(pattern_str_set)
+            for i, pattern_char in enumerate(unique_pattern_chars)
         }
         return self._colors_to_pattern(
             colors=[

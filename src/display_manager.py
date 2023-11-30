@@ -152,6 +152,7 @@ class DisplayManager:
         )
         if total_amount % num_split == 0:
             return output
-        output += delimiter
+        if total_amount > num_split:
+            output += delimiter
         output += s * (total_amount % num_split)
         return output
